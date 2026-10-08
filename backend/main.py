@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -12,7 +13,15 @@ app.include_router(explorer_router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"], # Allow your React app
+    allow_origins=[
+	origin.strip()
+	for origin in os.getenv(
+        	"CORS_ORIGINS",
+        	"http://localhost:5173"
+    	).split(",")
+    	if origin.strip()
+    ],
+    #allow_origins=["http://localhost:5173"], # Allow your React app
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

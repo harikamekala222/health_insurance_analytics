@@ -20,3 +20,7 @@ frontend/healthpulse-demo.zip
 .agents/
 /AGENTS.md
 /DEMO.md
+backend/.env
+frontend/node_modules/
+backend/venv/
+*.pyc
